@@ -155,7 +155,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
         layoutContainers()
     }
     
-    private func layoutContainers() {
+    open func layoutContainers() {
         let itemWidth = tabBar.bounds.width / CGFloat(containers.count)
         let isRTL = tabBar.userInterfaceLayoutDirection == .rightToLeft
         
