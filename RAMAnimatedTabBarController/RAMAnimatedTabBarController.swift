@@ -87,9 +87,10 @@ open class RAMAnimatedTabBarController: UITabBarController {
     open override var selectedIndex: Int {
         set {
             selectedIndex = newValue
+            self.setBottomLinePosition(index: selectedIndex)
         }
-        didSet {
-           self.setBottomLinePosition(index: selectedIndex)
+        get {
+            selectedIndex
         }
     }
 
