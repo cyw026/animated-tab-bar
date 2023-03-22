@@ -87,7 +87,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
     open override var selectedIndex: Int {
         didSet {
            self.setBottomLinePosition(index: selectedIndex)
-            handleSelection(index: index)
+            handleSelection(index: selectedIndex)
         }
     }
 
