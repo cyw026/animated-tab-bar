@@ -87,6 +87,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
     open override var selectedIndex: Int {
         didSet {
            self.setBottomLinePosition(index: selectedIndex)
+            handleSelection(index: selectedIndex)
         }
     }
 
@@ -218,7 +219,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
             }
             item.iconView = (icon: icon, textLabel: textLabel)
             
-            if selectedIndex == index { // selected first elemet
+            if self.selectedIndex == index { // selected first elemet
                 item.selectedState()
                 container.backgroundColor = (items as [RAMAnimatedTabBarItem])[index].bgSelectedColor
             } else {
