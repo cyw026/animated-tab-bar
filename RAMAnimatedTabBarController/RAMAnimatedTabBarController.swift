@@ -124,12 +124,11 @@ open class RAMAnimatedTabBarController: UITabBarController {
 
     override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { (transitionCoordinatorContext) -> Void in
-            print("size0:", size.debugDescription)
-            self.layoutContainers()
+            print("size0:", self.tabBar.bounds.debugDescription)
+            self.layoutContainers(size)
         }, completion: { (transitionCoordinatorContext) -> Void in
             //refresh view once rotation is completed not in will transition as it returns incorrect frame size.Refresh here
-            print("size:", size.debugDescription)
-            self.layoutContainers()
+            print("size:", self.tabBar.bounds.debugDescription)
         })
         super.viewWillTransition(to: size, with: coordinator)
     }
@@ -156,11 +155,11 @@ open class RAMAnimatedTabBarController: UITabBarController {
             createCustomIcons(containers: containers)
         }
         
-        layoutContainers()
+        layoutContainers(tabBar.bounds.size)
     }
     
-    open func layoutContainers() {
-        let itemWidth = tabBar.bounds.width / CGFloat(containers.count)
+    open func layoutContainers(_ size: CGSize = .zero) {
+        let itemWidth = size.width / CGFloat(containers.count)
         let isRTL = tabBar.userInterfaceLayoutDirection == .rightToLeft
         
         for (index, container) in containers.enumerated() {
@@ -176,7 +175,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
                 iconView?.frame = CGRect(x: iconX, y: iconY, width: iconSize.width, height: iconSize.height)
                 
                 let label = item.iconView?.textLabel
-                let labelSize = label?.sizeThatFits(CGSize.zero) ?? CGSize(width: tabBar.frame.size.width / CGFloat(containers.count), height: 20)
+                let labelSize = label?.sizeThatFits(CGSize.zero) ?? CGSize(width: itemWidth, height: 20)
                 let labelX = (container.frame.width - labelSize.width) / 2 + item.titlePositionAdjustment.horizontal
                 let labelY = (container.frame.height) / 2 + Theme.defaultTitleVerticalOffset + item.titlePositionAdjustment.vertical
                 label?.frame = CGRect(x: labelX, y: labelY, width: labelSize.width, height: labelSize.height)
