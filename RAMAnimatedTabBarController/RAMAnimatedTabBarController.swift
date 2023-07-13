@@ -127,6 +127,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
             self.layoutContainers()
         }, completion: { (transitionCoordinatorContext) -> Void in
             //refresh view once rotation is completed not in will transition as it returns incorrect frame size.Refresh here
+            self.layoutContainers()
         })
         super.viewWillTransition(to: size, with: coordinator)
     }
