@@ -124,11 +124,9 @@ open class RAMAnimatedTabBarController: UITabBarController {
 
     override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { (transitionCoordinatorContext) -> Void in
-            print("size0:", self.tabBar.bounds.debugDescription)
             self.layoutContainers(size)
         }, completion: { (transitionCoordinatorContext) -> Void in
             //refresh view once rotation is completed not in will transition as it returns incorrect frame size.Refresh here
-            print("size:", self.tabBar.bounds.debugDescription)
         })
         super.viewWillTransition(to: size, with: coordinator)
     }
